@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+<script src="Scripts/kiwi.js"></script>
+<script src="plugins/bitmapText/bitmapText-1.0.0.js"></script>
+<script src="Scripts/myState.js"></script>
+<script src="Scripts/loadingState.js"></script>
+<script>
+    var gameInit = true;
+    var sign3Rchd = false;
+    var sign13Rchd = false;
+    var sign14Rchd = false;
+    var sign14RchdFlag = false;
+    var sign14RchdX = 4000;
+    var ninjaPause = false;
+    var warehouseSel = false;
+    var cusOrderPathSel = false;
+    var isISCSel = false;
+    var isMetaPackSel=false;
+    var isISC99Sel = false;
+    var isOllSel = false;
+    var isLymBrSel = false;
+    var gameOptions = {
+        width: 2400,
+        height:1000
+    };
+    var myGame = new Kiwi.Game('game-container', 'Basic Follow', null, gameOptions);
+    myGame.states.addState(loadingState);
+    myGame.states.addState(myState);
+    myGame.states.addState(preloader, true);
+    myGame.states.switchState("preloader");
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,270 @@
+﻿<html>
+<body>
+<script src="Scripts/jquery-2.1.1.min.js"></script>
+<script src="Scripts/kiwi.js"></script>
+<script src="plugins/bitmapText/bitmapText-1.0.0.js"></script>
+<script type="text/javascript">
+    var state = new Kiwi.State('Play');
+    state.preload = function () {
+        Kiwi.State.prototype.preload.call(this);
+        this.addImage('grid', 'images/background1.png');
+        this.addImage('header', 'images/header.png', true);
+        this.addImage('sign', 'images/sign.png', true);
+        this.addImage('header', 'images/header.png', true);
+        this.addImage('textbg1', 'images/textbg1.png', true);
+        this.addImage('textbg2', 'images/textbg2.png', true);
+        this.addImage('textbg3', 'images/textbg3.png', true);
+        this.addImage('orderTyp2', 'images/2.png', true);
+        this.addImage('ISCButton', 'images/ISC.png', true);
+        this.addImage('orderTyp3', 'images/3.png', true);
+        this.addImage('META_PACKButton', 'images/META_PACK.png', true);
+        this.addImage('orderTyp4', 'images/4.png', true);
+        this.addImage('ISC20Button', 'images/ISC20.png', true);
+        this.addImage('ISCLock', 'images/lock1.png', true);
+        this.addImage('META_PACKLock', 'images/lock1.png', true);
+        this.addImage('ISC20Lock', 'images/lock1.png', true);
+        this.addSpriteSheet('ninja', 'images/ninja.png', 150, 117, true);
+        this.addSpriteSheet('textAtlas', 'images/textAtlas.png', 16, 30, true);
+        this.addSpriteSheet('otherfont', 'images/otherfont.png', 21, 30, true);
+    };
+    state.create = function () {
+        Kiwi.State.prototype.create.call(this);
+        this.group = new Kiwi.Group(this);
+        this.addChild(this.group);
+        this.spriteWidth = 150;
+        this.spriteHeight = 117;
+        this.addButtons();
+        this.background = new Kiwi.GameObjects.StaticImage(this, this.textures['grid'], 0, 0);
+        this.background.addTag('background');
+        this.group.addChild(this.background);
+        
+        this.header = new Kiwi.GameObjects.StaticImage(this, this.textures['header'], 12, 0);
+        this.group.addChild(this.header);
+        this.textbg1 = new Kiwi.GameObjects.StaticImage(this, this.textures['textbg1'], 29, 148);
+        this.group.addChild(this.textbg1);
+        this.textbg1.alpha = 0;
+        this.textbg2 = new Kiwi.GameObjects.StaticImage(this, this.textures['textbg2'], 29, 148);
+        this.group.addChild(this.textbg2);
+        this.textbg2.alpha = 0;
+        this.textbg3 = new Kiwi.GameObjects.StaticImage(this, this.textures['textbg3'], 260, 148);
+        this.group.addChild(this.textbg3);
+        this.textbg3.alpha = 0;
+        this.textbg4 = new Kiwi.GameObjects.StaticImage(this, this.textures['textbg3'], 540, 148);
+        this.group.addChild(this.textbg4);
+        this.textbg4.alpha = 0;
+        this.textbg5 = new Kiwi.GameObjects.StaticImage(this, this.textures['textbg3'], 29, 148);
+        this.group.addChild(this.textbg5);
+        this.textbg5.alpha = 0;
+        this.textbg6 = new Kiwi.GameObjects.StaticImage(this, this.textures['textbg3'], 260, 148);
+        this.group.addChild(this.textbg6);
+        this.textbg6.alpha = 0;
+        this.textbg7 = new Kiwi.GameObjects.StaticImage(this, this.textures['textbg3'], 540, 148);
+        this.group.addChild(this.textbg7);
+        this.textbg7.alpha = 0;
+        this.sign1 = new Kiwi.GameObjects.StaticImage(this, this.textures['sign'], 30, 430);
+        this.group.addChild(this.sign1);
+        this.sign2 = new Kiwi.GameObjects.StaticImage(this, this.textures['sign'], 300, 430);
+        this.group.addChild(this.sign2);
+        this.sign3 = new Kiwi.GameObjects.StaticImage(this, this.textures['sign'], 750, 430);
+        this.group.addChild(this.sign3);
+        this.sign4 = new Kiwi.GameObjects.StaticImage(this, this.textures['sign'], 970, 430);
+        this.group.addChild(this.sign4);
+        this.sign5 = new Kiwi.GameObjects.StaticImage(this, this.textures['sign'], 1200, 430);
+        this.group.addChild(this.sign5);
+        this.sign6 = new Kiwi.GameObjects.StaticImage(this, this.textures['sign'], 1490, 430);
+        this.group.addChild(this.sign6);
+        this.sign7 = new Kiwi.GameObjects.StaticImage(this, this.textures['sign'], 1750, 430);
+        this.group.addChild(this.sign7);
+       
+        this.selOrdrTyp2 = new Kiwi.GameObjects.Sprite(this, this.textures.orderTyp2, 670, 290);
+        this.selOrdrTyp2.addTag('typ2');
+        this.group.addChild(this.selOrdrTyp2);
+        this.selOrdrTyp3 = new Kiwi.GameObjects.Sprite(this, this.textures.orderTyp3, 910, 290);
+        this.selOrdrTyp3.addTag('typ3');
+        this.group.addChild(this.selOrdrTyp3);
+        this.selOrdrTyp4 = new Kiwi.GameObjects.Sprite(this, this.textures.orderTyp4, 1150, 290);
+        this.selOrdrTyp4.addTag('typ4');
+        this.group.addChild(this.selOrdrTyp4);
+        var L1 = new Kiwi.GameObjects.Sprite(this, this.textures.ISCLock, 670, 290);
+        L1.addTag('ISC');
+        this.group.addChild(L1);
+        var L2 = new Kiwi.GameObjects.Sprite(this, this.textures.META_PACKLock, 915, 290);
+        L2.addTag('META_PACK');
+        this.group.addChild(L2);
+        var L3 = new Kiwi.GameObjects.Sprite(this, this.textures.ISC20Lock, 1158, 290);
+        L3.addTag('ISC20');
+        this.group.addChild(L3);
+        /*--this.L11 = new Kiwi.GameObjects.StaticImage(this, this.textures['L1'], 740, 340);
+        this.addChild(this.L11);
+        this.L22 = new Kiwi.GameObjects.StaticImage(this, this.textures['L2'], 970, 340);
+        this.addChild(this.L22);
+        this.L33 = new Kiwi.GameObjects.StaticImage(this, this.textures['L3'], 1200, 340);
+        this.addChild(this.L33);--*/
+        //this.step = 3;
+        // Adding Path Slection to groups
+        // Each sprite that is added to the group is given multiple tags of the colors that exist on their texture atlas. 
+        // End
+        //Other Images
+        /*this.text1 = new Kiwi.Plugins.GameObjects.BitmapText(this, this.textures['textAtlas'],
+        "Hey look!    This is a    text box.", 66, 198);
+        this.addChild(this.text1);
+        this.text1.maxWidth = 210;
+        this.text1.alphabeticalCells['.'] = 63;
+        this.text1.alphabeticalCells['!'] = 62;
+        this.text1.alphabeticalCells['$'] = 64;
+        this.text1.alphabeticalCells['#'] = 65;
+        this.text1.alphabeticalCells[' '] = 66;
+        this.text1.scaleX = 0.6;
+        this.text1.scaleY = 0.6;
+        this.text1.alpha = 0;
+        this.text2 = new Kiwi.Plugins.GameObjects.BitmapText(this, this.textures['textAtlas'],
+        "There is more textin this section so we have made it smaller and incresed the width of the object.", 300, 180);
+        this.addChild(this.text2);
+        this.text2.maxWidth = 300;
+        this.text2.alphabeticalCells['.'] = 63;
+        this.text2.alphabeticalCells['!'] = 62;
+        this.text2.alphabeticalCells['$'] = 64;
+        this.text2.alphabeticalCells['#'] = 65;
+        this.text2.alphabeticalCells[' '] = 66;
+        this.text2.scaleX = 0.6;
+        this.text2.scaleY = 0.6;
+        this.text2.alpha = 0;
+        this.text3 = new Kiwi.Plugins.GameObjects.BitmapText(this, this.textures['textAtlas'],
+        "You can change the    font and color of the text by using a       different texture", 560, 192);
+        this.addChild(this.text3);
+        this.text3.maxWidth = 360;
+        this.text3.alphabeticalCells['.'] = 63;
+        this.text3.alphabeticalCells['!'] = 62;
+        this.text3.alphabeticalCells['$'] = 64;
+        this.text3.alphabeticalCells['#'] = 65;
+        this.text3.alphabeticalCells[' '] = 66;
+        this.text3.scaleX = 0.6;
+        this.text3.scaleY = 0.6;
+        this.text3.alpha = 0;
+        this.topText = new Kiwi.Plugins.GameObjects.BitmapText(this, this.textures['textAtlas'],
+        "ASDA DOTCOM FULFILMENT : WM2011!", 195, 33);
+        this.topText.maxWidth = 2000;
+        this.topText.alphabeticalCells['.'] = 63;
+        this.topText.alphabeticalCells['!'] = 62;
+        this.topText.alphabeticalCells['$'] = 64;
+        this.topText.alphabeticalCells['#'] = 65;
+        this.topText.alphabeticalCells[' '] = 66;
+        this.topText.scaleX = 0.7;
+        this.topText.scaleY = 0.9;
+        this.addChild(this.topText);*/
+        // Other Images :End
+        this.jumpKey = this.game.input.keyboard.addKey(Kiwi.Input.Keycodes.ALT, true);
+        this.downKey = this.game.input.keyboard.addKey(Kiwi.Input.Keycodes.DOWN, true);
+        this.rightKey = this.game.input.keyboard.addKey(Kiwi.Input.Keycodes.RIGHT, true);
+        this.leftKey = this.game.input.keyboard.addKey(Kiwi.Input.Keycodes.LEFT, true);
+        this.character = new Kiwi.GameObjects.Sprite(this, this.textures['ninja'], 10, 400);
+        this.character.animation.add('idle', [0], 0.1, false);
+        this.character.animation.add('move', [1, 2, 3, 4, 5, 6], 0.1, true);
+        this.character.animation.add('jump', [9], 0.1, true);
+        this.character.animation.play('idle');
+        this.addChild(this.character);
+        this.character.box.hitbox = new Kiwi.Geom.Rectangle(48, 37, 27, 75);
+        //this.upKey = this.game.input.keyboard.addKey(Kiwi.Input.Keycodes.UP, true);
+        //this.downKey = this.game.input.keyboard.addKey(Kiwi.Input.Keycodes.DOWN, true);
+        //this.leftKey = this.game.input.keyboard.addKey(Kiwi.Input.Keycodes.LEFT, true);
+        //this.rightKey = this.game.input.keyboard.addKey(Kiwi.Input.Keycodes.RIGHT, true);
+    }
+    state.addButtons = function () {
+        var button;
+        button = new Button(this, 430, 320, 'ISC');
+        this.addChild(button);
+        button = new Button(this, 430, 360, 'META_PACK');
+        this.addChild(button);
+        button = new Button(this, 430, 400, 'ISC20');
+        this.addChild(button);
+    }
+    var Button = function (state, x, y, color) {
+        this.state = state;
+        // When a button is clicked all of the sprites with the tag of the tag of
+        // the color of the button are toggled between visible and not.
+        Kiwi.GameObjects.Sprite.call(this, this.state, this.state.textures[color + "Button"], x, y);
+        this.color = color;
+        this.colorVisible = true;
+        this.input.onDown.add(this.toggleColor, this);
+    }
+    Kiwi.extend(Button, Kiwi.GameObjects.Sprite);
+    Button.prototype.toggleColor = function () {
+        var sprites = this.state.group.getChildrenByTag(this.color);
+        this.colorVisible = !this.colorVisible;
+        for (var i = sprites.length - 1; i >= 0; i--) {
+            sprites[i].visible = this.colorVisible;
+        }
+    }
+    state.update = function () {
+        Kiwi.State.prototype.update.call(this);
+        // Move the player with the arrow keys. 
+        if (this.leftKey.isDown) {
+            this.character.scaleX = -1;
+            this.character.x -= 3;
+            if (this.character.animation.currentAnimation.name != 'move')
+                this.character.animation.switchTo('move', true);
+        }
+        else if (this.rightKey.isDown) {
+            this.character.scaleX = 1;
+            this.character.x += 3;
+            if (this.character.animation.currentAnimation.name != 'move')
+                this.character.animation.switchTo('move', true);
+        }
+        else if (this.jumpKey.isDown) {
+            this.character.scaleY = 1;
+            this.character.y -= 5;
+            if (this.character.animation.currentAnimation.name != 'jump')
+                this.character.animation.switchTo('jump', true);
+        }
+        else
+            this.character.animation.switchTo('idle');
+        /* For Sign Borad Text*/
+        if (this.character.box.hitbox.intersects(this.sign1.box.hitbox) && this.text1.alpha == 0) {
+            var tw = this.game.tweens.create(this.text1);
+            tw.to({ alpha: 1 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+            var tw = this.game.tweens.create(this.textbg1);
+            tw.to({ alpha: 1 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+        }
+        else if (!this.character.box.hitbox.intersects(this.sign1.box.hitbox) && this.text1.alpha == 1) {
+            var tw = this.game.tweens.create(this.text1);
+            tw.to({ alpha: 0 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+            var tw = this.game.tweens.create(this.textbg1);
+            tw.to({ alpha: 0 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+        }
+        if (this.character.box.hitbox.intersects(this.sign2.box.hitbox) && this.text2.alpha == 0) {
+            var tw = this.game.tweens.create(this.text2);
+            tw.to({ alpha: 1 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+            var tw = this.game.tweens.create(this.textbg2);
+            tw.to({ alpha: 1 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+        }
+        else if (!this.character.box.hitbox.intersects(this.sign2.box.hitbox) && this.text2.alpha == 1) {
+            var tw = this.game.tweens.create(this.text2);
+            tw.to({ alpha: 0 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+            var tw = this.game.tweens.create(this.textbg2);
+            tw.to({ alpha: 0 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+        }
+        if (this.character.box.hitbox.intersects(this.sign3.box.hitbox) && this.text3.alpha == 0) {
+            var tw = this.game.tweens.create(this.text3);
+            tw.to({ alpha: 1 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+            var tw = this.game.tweens.create(this.textbg3);
+            tw.to({ alpha: 1 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+        }
+        else if (!this.character.box.hitbox.intersects(this.sign3.box.hitbox) && this.text3.alpha == 1) {
+            var tw = this.game.tweens.create(this.text3);
+            tw.to({ alpha: 0 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+            var tw = this.game.tweens.create(this.textbg3);
+            tw.to({ alpha: 0 }, 500, Kiwi.Animations.Tweens.Easing.Linear.None, true);
+        }
+        /* End*/
+        var playerOffsetX = this.character.width * 0.5;
+        var playerOffsetY = this.character.height * 0.5;
+        this.game.cameras.defaultCamera.transform.x = -1 * this.character.x + this.game.stage.width * 0.5 - playerOffsetX;
+        this.game.cameras.defaultCamera.transform.y = -1 * this.character.y + this.game.stage.height * 0.5 - playerOffsetY;
+    }
+    var gameOptions = {
+        width: 1280,
+        height: 1024
+    };
+    var game = new Kiwi.Game('game-container', 'Basic Follow', state, gameOptions);
+</script>
+</html>
